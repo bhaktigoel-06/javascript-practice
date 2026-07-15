@@ -32,27 +32,20 @@ Closure is when a function remembers variables from its lexical scope even after
 
 **example from code **
 
+```js
 export function once(fn) {
-
   let hasRun = false;
-
   let result;
 
-  return function(...args) {
-
+  return function (...args) {
     if (!hasRun) {
-
       result = fn(...args);
-
       hasRun = true;
-
     }
-
     return result;
-
   };
-  
 }
+```
 
 
 --here, hasRun is defined outside function() but is still used even after the function(where it has defined) ended
