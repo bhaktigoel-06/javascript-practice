@@ -32,7 +32,16 @@
  * functions still refer to it, and nothing outside can reach it.
  */
 export function makeCounter(start = 0) {
-  // TODO
+  let count = start;
+  return {
+    increment() {
+      count++;
+      return count;
+    },
+    getValue() {
+      return count;
+    }
+  };
 }
 
 /**
@@ -47,7 +56,15 @@ export function makeCounter(start = 0) {
  * and one remembering what it returned.
  */
 export function once(fn) {
-  // TODO
+  let hasRun = false;
+  let result;
+  return function(...args) {
+    if (!hasRun) {
+      result = fn(...args);
+      hasRun = true;
+    }
+    return result;
+  };
 }
 
 /**
@@ -62,7 +79,9 @@ export function once(fn) {
  * `double` and `triple` each remember their own `factor`. That is a closure too.
  */
 export function multiplyBy(factor) {
-  // TODO
+  return function(number) {
+    return number * factor;
+  };
 }
 
 /**
@@ -79,7 +98,11 @@ export function multiplyBy(factor) {
  * "higher-order function" means.
  */
 export function applyToAll(items, fn) {
-  // TODO
+  const results = [];
+  for (let i = 0; i < items.length; i++) {
+    results.push(fn(items[i]));
+  }
+  return results;
 }
 
 /**
@@ -97,5 +120,9 @@ export function applyToAll(items, fn) {
  * it doesn't click, bring it to Friday. It's a great question.
  */
 export function collectHandlers(n) {
-  // TODO
+  const handlers = [];
+  for (let i = 0; i < n; i++) {
+    handlers.push(() => i);
+  }
+  return handlers;
 }
