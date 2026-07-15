@@ -85,7 +85,7 @@ export function getCity(student) {
  *   formatGpa(null)       →  '—'
  *   formatGpa(undefined)  →  '—'
  *
- * Here's the interesting bit. It's tempting to write `gpa || '—'`. But `0` is
+ * Here's the interesting bit. It's tempting to write `gpa || '—'`. But `0` is,for
  * one of JavaScript's "falsy" values, so a student who genuinely scored 0 would
  * get an em-dash and their real mark would vanish from the screen.
  *
