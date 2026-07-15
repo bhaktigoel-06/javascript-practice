@@ -24,7 +24,7 @@
  * `push` would change the original. Spread the old array into a new one instead.
  */
 export function addStudent(students, student) {
-  // TODO
+  return [...students, student];
 }
 
 /**
@@ -38,7 +38,13 @@ export function addStudent(students, student) {
  * ({ ...student, ...patch }). For everyone else, just return them as they are.
  */
 export function updateStudent(students, id, patch) {
-  // TODO
+  return students.map(student => {
+    if (student.id === id) {
+      return { ...student, ...patch };
+    } else {
+      return student;
+    }
+  });
 }
 
 /**
@@ -50,7 +56,7 @@ export function updateStudent(students, id, patch) {
  * `filter` is perfect for this — and it already returns a new array for you.
  */
 export function removeStudent(students, id) {
-  // TODO
+  return students.filter(student => student.id !== id);
 }
 
 /**
@@ -67,7 +73,7 @@ export function removeStudent(students, id) {
  * an error, and `??` supplies the fallback.
  */
 export function getCity(student) {
-  // TODO
+  return student.address?.city ?? 'Unknown';
 }
 
 /**
@@ -89,5 +95,8 @@ export function getCity(student) {
  * (`(8.4).toFixed(1)` gives you the one-decimal string.)
  */
 export function formatGpa(gpa) {
-  // TODO
+  if (gpa === null || gpa === undefined) {
+    return '—';
+  }
+  return gpa.toFixed(1);
 }
