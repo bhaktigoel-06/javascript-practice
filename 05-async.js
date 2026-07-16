@@ -24,8 +24,10 @@
  * This little function is used by all the others below, so start here.
  */
 export function sleep(ms) {
-  // TODO
-}
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+  }
 
 /**
  * Loads one student, and never throws.
@@ -43,7 +45,12 @@ export function sleep(ms) {
  * into a value you can do something sensible with.
  */
 export async function safeLoad(loader, id) {
-  // TODO
+  try {
+    const data = await loader(id);
+    return { data, error: null };
+  } catch (error) {
+    return { data: null, error: error.message };
+  }
 }
 
 /**
@@ -59,7 +66,8 @@ export async function safeLoad(loader, id) {
  * If any one of them fails, the whole thing fails. That's fine here.
  */
 export function loadAll(ids, loader) {
-  // TODO
+  const promises = ids.map((id) => loader(id));
+  return Promise.all(promises);
 }
 
 /**
@@ -79,5 +87,10 @@ export function loadAll(ids, loader) {
  * on the answer to the last one. But when you don't, `Promise.all` is free speed.)
  */
 export async function loadInOrder(ids, loader) {
-  // TODO
+  const results = [];
+  for (const id of ids) {
+    const data = await loader(id);
+    results.push(data);
+  }
+  return results;
 }
