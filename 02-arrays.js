@@ -35,6 +35,7 @@ export function getNames(students) {
  */
 export function filterByCourse(students, course) {
   return students.filter(student => student.course === course);
+  return students.map(student=>student.name);
 }
 
 /**
